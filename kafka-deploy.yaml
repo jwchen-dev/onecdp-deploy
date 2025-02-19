@@ -19,7 +19,7 @@ spec:
             - containerPort: 9094
           env:
             - name: KAFKA_CFG_NODE_ID
-              value: 0
+              value: '0'
             - name: KAFKA_CFG_PROCESS_ROLES
               value: controller,broker
             - name: KAFKA_CFG_LISTENERS
