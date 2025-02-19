@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Chart.Name }}
-  namespace: oneec
+  namespace: default
   labels:
     app: {{ .Chart.Name }}
 
