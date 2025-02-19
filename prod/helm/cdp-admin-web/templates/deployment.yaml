@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: oneec
+  labels:
+    app: {{ .Chart.Name }}
+    
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+    
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        
+      labels:
+        app: {{ .Chart.Name }}
+        version: {{ .Values.image.version }}
+        
+    spec:
+      volumes:
+        - name: {{ .Chart.Name }}-configmap-volume
+          configMap:
+            name: {{ .Chart.Name }}-configmap
+
+      imagePullSecrets:
+      - name: harbor-registry
+
+      nodeSelector:
+        K8S: node
+            
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "registry.oneec-dev.ai/onecdp/{{ .Chart.Name }}:{{ .Values.image.version }}"
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - name: {{ .Chart.Name }}-configmap-volume
+            mountPath: /etc/nginx/html/js/env.js
+            subPath: env.js
+            
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+            
+        ports:
+        - name: http
+          containerPort: 80
+        - name: http-health
+          containerPort: 8080
+                
+        livenessProbe:
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          httpGet:
+            path: /health
+            port: 8080
+
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sh","-c","sleep 5; nginx -s quit; while killall -0 nginx; do sleep 1; done"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: oneec
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ .Chart.Name }}

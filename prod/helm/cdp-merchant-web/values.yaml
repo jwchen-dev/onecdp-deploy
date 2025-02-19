@@ -1,0 +1,4 @@
+env: prod
+
+image:
+  version: ga-0.1.42

@@ -1,0 +1,137 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: oneec
+  labels:
+    app: {{ .Chart.Name }}
+    
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+    
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /prometheus
+        
+      labels:
+        app: {{ .Chart.Name }}
+        version: {{ .Values.image.version }}
+        
+    spec:
+      volumes:
+        - name: {{ .Chart.Name }}-configmap-volume
+          configMap:
+            name: {{ .Chart.Name }}-configmap
+
+      imagePullSecrets:
+      - name: harbor-registry
+
+      nodeSelector:
+        K8S: node
+            
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "registry.oneec-dev.ai/onecdp/{{ .Chart.Name }}:{{ .Values.image.version }}"
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - name: {{ .Chart.Name }}-configmap-volume
+            mountPath: /opt/service/config/application.properties
+            subPath: application.properties
+            readOnly: true
+          - name: {{ .Chart.Name }}-configmap-volume
+            mountPath: /opt/service/config/masterDB.properties
+            subPath: masterDB.properties
+            readOnly: true
+          - name: {{ .Chart.Name }}-configmap-volume
+            mountPath: /opt/service/config/hotrod-client.properties
+            subPath: hotrod-client.properties
+            readOnly: true
+          - name: {{ .Chart.Name }}-configmap-volume
+            mountPath: /opt/service/config/solr.properties
+            subPath: solr.properties
+            readOnly: true
+          - name: {{ .Chart.Name }}-configmap-volume
+            mountPath: /opt/service/spring-boot.sh
+            subPath: spring-boot.sh
+
+        env:
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: cdp-db-secret
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: cdp-db-secret
+                key: password
+          - name: CACHE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: cache-secret
+                key: username
+          - name: CACHE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: cache-secret
+                key: password
+
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+          limits:
+            cpu: 2000m
+            memory: 2Gi
+            
+        ports:
+        - name: http
+          containerPort: 8080
+        
+        readinessProbe:
+          initialDelaySeconds: 35
+          periodSeconds: 5
+          timeoutSeconds: 3
+          httpGet:
+            path: /health/readiness
+            port: 8080
+
+        livenessProbe:
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 3
+          httpGet:
+            path: /health/liveness
+            port: 8080
+        
+        lifecycle:
+          preStop:
+            exec:
+              command: ["curl", "-XPOST", "http://localhost:8080/shutdown"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: oneec
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+      name: http
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+      name: dashboard
+  selector:
+    app: {{ .Chart.Name }}
