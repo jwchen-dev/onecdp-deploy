@@ -1,16 +1,12 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: kafka
   namespace: default
   labels:
     app: kafka-app
 spec:
-  serviceName: kafka-svc
   replicas: 1
-  selector:
-    matchLabels:
-      app: kafka-app
   template:
     metadata:
       labels:
@@ -22,6 +18,8 @@ spec:
           ports:
             - containerPort: 9094
           env:
+            - name: KAFKA_CFG_NODE_ID
+              value: 0
             - name: KAFKA_CFG_PROCESS_ROLES
               value: controller,broker
             - name: KAFKA_CFG_LISTENERS
