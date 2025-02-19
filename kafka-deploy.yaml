@@ -7,6 +7,9 @@ metadata:
     app: kafka-app
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-app
   template:
     metadata:
       labels:
