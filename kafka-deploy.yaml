@@ -28,11 +28,12 @@ spec:
             - name: KAFKA_CFG_LISTENERS
               value: PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
             - name: KAFKA_CFG_ADVERTISED_LISTENERS
-              value: PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+              #value: PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+              value: PLAINTEXT://localhost:9092,EXTERNAL://localhost:9094
             - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
               value: CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
             - name: KAFKA_CFG_CONTROLLER_QUORUM_VOTERS
-              value: 0@kafka:9093
+              value: 0@localhost:9093
             - name: KAFKA_CFG_CONTROLLER_LISTENER_NAMES
               value: CONTROLLER
             #- name: REPLICAS
@@ -79,19 +80,19 @@ spec:
 #      nodePort: 30092
 #  selector:
 #    app: kafka-app
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: kafka
-  labels:
-    name: kafka
-spec:
-  ports:
-    - port: 9093
-      name: kafka-port
-      protocol: TCP
-  selector:
-    app: kafka
-    id: "1"
-  type: LoadBalancer
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: kafka
+#  labels:
+#    name: kafka
+#spec:
+#  ports:
+#    - port: 9093
+#      name: kafka-port
+#      protocol: TCP
+#  selector:
+#    app: kafka
+#    id: "1"
+#  type: LoadBalancer
