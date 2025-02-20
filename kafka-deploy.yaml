@@ -4,19 +4,19 @@ metadata:
   name: kafka
   namespace: default
   labels:
-    app: kafka-app
+    app: kafka
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kafka-app
+      app: kafka
   template:
     metadata:
       labels:
-        app: kafka-app
+        app: kafka
     spec:
       containers:
-        - name: kafka-container
+        - name: kafka
           image: bitnami/kafka:latest
           ports:
             - containerPort: 9094
@@ -79,3 +79,19 @@ spec:
 #      nodePort: 30092
 #  selector:
 #    app: kafka-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-service
+  labels:
+    name: kafka
+spec:
+  ports:
+    - port: 9093
+      name: kafka-port
+      protocol: TCP
+  selector:
+    app: kafka
+    id: "1"
+  type: LoadBalancer
