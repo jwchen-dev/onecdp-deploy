@@ -20,7 +20,7 @@ spec:
           image: provectuslabs/kafka-ui:latest
           env:
             - name: DYNAMIC_CONFIG_ENABLED
-              value: true
+              value: 'true'
 ---
 apiVersion: v1
 kind: Service
