@@ -35,5 +35,4 @@ spec:
       protocol: TCP
   selector:
     app: kafka-ui
-    id: "1"
   type: LoadBalancer
