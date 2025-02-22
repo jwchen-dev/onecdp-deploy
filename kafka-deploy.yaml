@@ -18,8 +18,8 @@ spec:
       containers:
         - name: kafka
           image: bitnami/kafka:latest
-          ports:
-            - containerPort: 9094
+          #ports:
+          #  - containerPort: 9094
           env:
             - name: KAFKA_CFG_NODE_ID
               value: '0'
@@ -81,18 +81,18 @@ spec:
 #  selector:
 #    app: kafka-app
 #---
-#apiVersion: v1
-#kind: Service
-#metadata:
-#  name: kafka
-#  labels:
-#    name: kafka
-#spec:
-#  ports:
-#    - port: 9093
-#      name: kafka-port
-#      protocol: TCP
-#  selector:
-#    app: kafka
-#    id: "1"
-#  type: LoadBalancer
+apiVersion: v1
+kind: Service
+metadata:
+  # Unique key of the Service instance
+  name: kafka
+spec:
+  ports:
+    # Accept traffic sent to port 
+    - name: tcp
+      port: 9092
+      targetPort: 9092
+  selector:
+    # this label selector
+    app: kafka
+  type: ClusterIP
