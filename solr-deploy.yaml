@@ -18,11 +18,9 @@ spec:
       containers:
         - name: solr
           image: 9311561018/onecdp-solr:8.11.1
-          #env:
-          #  - name: POSTGRES_PASSWORD
-          #    value: admin
-          #  - name: PGDATA
-          #    value: /var/lib/postgresql/data/pgdata
+          env:
+            - name: SOLR_XMX
+              value: 1024m
 ---
 apiVersion: v1
 kind: Service
