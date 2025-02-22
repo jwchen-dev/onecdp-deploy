@@ -18,8 +18,8 @@ spec:
       containers:
         - name: kafka
           image: bitnami/kafka:latest
-          #ports:
-          #  - containerPort: 9094
+          ports:
+            - containerPort: 9092
           env:
             - name: KAFKA_CFG_NODE_ID
               value: '0'
@@ -90,8 +90,8 @@ spec:
   ports:
     # Accept traffic sent to port 
     - name: tcp
-      port: 9093
-      targetPort: 9093
+      port: 9092
+      targetPort: 9092
   selector:
     # this label selector
     app: kafka
