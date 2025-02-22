@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infinispan
+  namespace: default
+  labels:
+    app: infinispan
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infinispann
+  template:
+    metadata:
+      labels:
+        app: infinispan
+    spec:
+      containers:
+        - name: infinispan
+          image: infinispan/server:13.0
+          env:
+            - name: USER
+              value: admin
+            - name: PASS
+              value: admin
+---
+apiVersion: v1
+kind: Service
+metadata:
+  # Unique key of the Service instance
+  name: infinispan-svc
+spec:
+  ports:
+    # Accept traffic sent to port 
+    - name: tcp11222
+      port: 11222
+      targetPort: 11222
+  selector:
+    # this label selector
+    app: infinispan
+  type: ClusterIP
