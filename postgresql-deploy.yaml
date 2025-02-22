@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql
+  namespace: default
+  labels:
+    app: postgresql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresql
+  template:
+    metadata:
+      labels:
+        app: postgresql
+    spec:
+      containers:
+        - name: postgresql
+          image: postgres:13
+          env:
+            - name: POSTGRES_PASSWORD
+              value: admin
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+---
+apiVersion: v1
+kind: Service
+metadata:
+  # Unique key of the Service instance
+  name: postgresql-svc
+spec:
+  ports:
+    # Accept traffic sent to port 
+    - name: tcp5432
+      port: 5432
+      targetPort: 5432
+  selector:
+    # this label selector
+    app: postgresql
+  type: ClusterIP
