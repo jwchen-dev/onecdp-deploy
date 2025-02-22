@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: solr
+  namespace: default
+  labels:
+    app: solr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: solr
+  template:
+    metadata:
+      labels:
+        app: solr
+    spec:
+      containers:
+        - name: solr
+          image: 9311561018/onecdp-solr:8.11.1
+          #env:
+          #  - name: POSTGRES_PASSWORD
+          #    value: admin
+          #  - name: PGDATA
+          #    value: /var/lib/postgresql/data/pgdata
+---
+apiVersion: v1
+kind: Service
+metadata:
+  # Unique key of the Service instance
+  name: solr-svc
+spec:
+  ports:
+    # Accept traffic sent to port 
+    - name: tcp8089
+      port: 8089
+      targetPort: 8080
+  selector:
+    # this label selector
+    app: solr
+  type: ClusterIP
