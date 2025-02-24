@@ -18,6 +18,7 @@ spec:
       containers:
         - name: solr
           image: 9311561018/onecdp-solr:8.11.4
+          imagePullPolicy: Always
           env:
             - name: SOLR_XMX
               value: 1024m
