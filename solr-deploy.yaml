@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: solr
-          image: 9311561018/onecdp-solr:8.11.1
+          image: 9311561018/onecdp-solr:8.11.4
           env:
             - name: SOLR_XMX
               value: 1024m
@@ -30,9 +30,9 @@ metadata:
 spec:
   ports:
     # Accept traffic sent to port 
-    - name: tcp8089
-      port: 8089
-      targetPort: 8080
+    - name: tcp8983
+      port: 8983
+      targetPort: 8983
   selector:
     # this label selector
     app: solr
