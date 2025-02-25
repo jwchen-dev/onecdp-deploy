@@ -1,4 +1,4 @@
 env: prod
 
 image:
-  version: dev-latest
+  version: latest
