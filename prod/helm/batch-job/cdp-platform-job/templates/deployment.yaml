@@ -29,8 +29,8 @@ spec:
           configMap:
             name: {{ .Chart.Name }}-configmap
 
-      imagePullSecrets:
-        - name: harbor-registry
+      #imagePullSecrets:
+      #  - name: harbor-registry
 
       #nodeSelector:
       #  K8S: node
