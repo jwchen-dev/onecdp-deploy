@@ -64,27 +64,27 @@ spec:
               subPath: app.properties
               readOnly: true
 
-          env:
-            - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: cdp-db-secret
-                  key: username
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: cdp-db-secret
-                  key: password
-            - name: CACHE_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: cache-secret
-                  key: username
-            - name: CACHE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: cache-secret
-                  key: password
+          #env:
+          #  - name: DB_USERNAME
+          #    valueFrom:
+          #      secretKeyRef:
+          #        name: cdp-db-secret
+          #        key: username
+          #  - name: DB_PASSWORD
+          #    valueFrom:
+          #      secretKeyRef:
+          #        name: cdp-db-secret
+          #        key: password
+          #  - name: CACHE_USERNAME
+          #    valueFrom:
+          #      secretKeyRef:
+          #        name: cache-secret
+          #        key: username
+          #  - name: CACHE_PASSWORD
+          #    valueFrom:
+          #      secretKeyRef:
+          #        name: cache-secret
+          #        key: password
 
           resources:
             requests:
