@@ -89,10 +89,10 @@ spec:
           resources:
             requests:
               cpu: 100m
-              memory: 100Mi
+              memory: 100mi
             limits:
               cpu: 500m
-              memory: 500Mi
+              memory: 500mi
 
           ports:
             - name: http
