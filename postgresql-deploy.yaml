@@ -1,27 +1,10 @@
-kind: PersistentVolume
 apiVersion: v1
-metadata:
-  name: postgres-pv-volume
-  labels:
-    type: local
-    app: postgres
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/var/data/postgresql"
----
 kind: PersistentVolumeClaim
-apiVersion: v1
 metadata:
   name: postgres-pv-claim
   labels:
     app: postgres
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:
@@ -54,8 +37,9 @@ spec:
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
           volumeMounts:
-          - mountPath: /var/data/postgresql
-            name: pg-volume
+          - name: pg-volume
+            mountPath: /var/lib/postgresql/data/pgdata
+            subPath: postgres
       volumes:
       - name: pg-volume
         persistentVolumeClaim:
