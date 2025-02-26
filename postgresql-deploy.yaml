@@ -29,8 +29,8 @@ spec:
       volumes:
       - name: pg-volume
         hostPath:
-          path: /data
-          type: Directory
+          path: /var/data/postgresql
+          type: DirectoryOrCreate
 ---
 apiVersion: v1
 kind: Service
