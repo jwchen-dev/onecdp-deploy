@@ -30,20 +30,28 @@ spec:
     spec:
       containers:
         - name: postgresql
-          image: postgres:13
+          image: bitnami/postgresql:13
           env:
             - name: POSTGRES_PASSWORD
               value: admin
+            - name: POSTGRESQL_VOLUME_DIR
+              value: "/bitnami/postgresql"
+            - name: PGDATA
+              value: "/bitnami/postgresql/data"
             #- name: PGDATA
             #  value: /var/lib/postgresql/data/pgdata
           volumeMounts:
-          - name: pg-volume
-            #mountPath: /var/lib/postgresql/data/pgdata
-            mountPath: /var/lib/postgresql/data
-            subPath: postgres
-      volumes:
-      - name: pg-volume
-        claimName: postgres-pv-claim
+            - name: data
+              mountPath: /bitnami/postgresql
+  volumeClaimTemplates:
+    - metadata:
+      name: data
+      spec:
+        accessModes:
+          - "ReadWriteMany"
+        resources:
+          requests:
+            storage: "5Gi"
 ---
 apiVersion: v1
 kind: Service
