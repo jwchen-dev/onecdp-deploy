@@ -29,7 +29,7 @@ spec:
       volumes:
       - name: pg-volume
         hostPath:
-          path: /var/data/postgresql
+          path: /data
           type: Directory
 ---
 apiVersion: v1
