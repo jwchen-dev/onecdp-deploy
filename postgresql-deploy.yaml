@@ -34,16 +34,16 @@ spec:
           env:
             - name: POSTGRES_PASSWORD
               value: admin
-            - name: PGDATA
-              value: /var/lib/postgresql/data/pgdata
+            #- name: PGDATA
+            #  value: /var/lib/postgresql/data/pgdata
           volumeMounts:
           - name: pg-volume
-            mountPath: /var/lib/postgresql/data/pgdata
+            #mountPath: /var/lib/postgresql/data/pgdata
+            mountPath: /var/lib/postgresql/data
             subPath: postgres
       volumes:
       - name: pg-volume
-        persistentVolumeClaim:
-          claimName: postgres-pv-claim
+        claimName: postgres-pv-claim
 ---
 apiVersion: v1
 kind: Service
