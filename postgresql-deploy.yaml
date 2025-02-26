@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: postgresql
   namespace: default
@@ -23,6 +23,14 @@ spec:
               value: admin
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
+          volumeMounts:
+          - mountPath: /var/data/postgresql
+            name: pg-volume
+      volumes:
+      - name: pg-volume
+        hostPath:
+          path: /var/data/postgresql
+          type: Directory
 ---
 apiVersion: v1
 kind: Service
