@@ -24,6 +24,7 @@
 在本地 Build Docker Image，並推到自己的 docker hub，再從 Azure 的 VM 做佈署到 K8s。
 
 1. cdp-member-process-job
+    03/03：deployed。
 1. cdp-order-process-job
 1. cdp-platform-job
     02/25：deployed。
