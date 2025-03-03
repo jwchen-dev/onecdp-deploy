@@ -30,6 +30,7 @@
 1. cdp-platform-job
     02/25：deployed。
 1. cdp-product-process-job
+    03/03：deployed。
 1. cdp-recommend-job
 1. cdp-statistic-job
 1. cdp-task-generate-job
