@@ -14,8 +14,10 @@
     02/23：deployed。
 1. ~~Deploy Postgresql~~
     02/23：deployed。
+    02/26~02/28：因 K8s Volume 掛不起來，改在 VM 上以 Docker Compose 啟動。
 1. ~~Deploy Solr~~
     02/23-02/25：deployed，確定自定義的 Schema + Config + IK jar 可以正確埋入與運行。
+    02/26~02/28：因 K8s Volume 掛不起來，改在 VM 上以 Docker Compose 啟動。
 
 ## Step 2：佈署 OneCDP Container
 
