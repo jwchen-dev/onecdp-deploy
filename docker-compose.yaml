@@ -4,16 +4,16 @@ services:
     container_name: solr
     image: 9311561018/onecdp-solr:8.11.4
     ports:
-        - 8983:8983
+      - 8983:8983
     volumes:
       - /var/data/solr:/var/data/solr
   postgresql:
     container_name: postgresql
     image: postgres:13
     environment:
-        - POSTGRES_PASSWORD=dSMghXDW6B
-        - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=dSMghXDW6B
+      - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
-        - 5432:5432
+      - 5432:5432
     volumes:
       - /var/data/postgresql:/var/data/postgresql
