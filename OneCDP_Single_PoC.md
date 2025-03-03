@@ -34,6 +34,7 @@
 1. cdp-recommend-job
     03/03：deployed。
 1. cdp-statistic-job
+    03/03：deployed。
 1. cdp-task-generate-job
 1. cdp-admin-web
 1. cdp-data-api
