@@ -26,6 +26,7 @@
 1. cdp-member-process-job
     03/03：deployed。
 1. cdp-order-process-job
+    03/03：deployed。
 1. cdp-platform-job
     02/25：deployed。
 1. cdp-product-process-job
