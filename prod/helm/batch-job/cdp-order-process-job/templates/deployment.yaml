@@ -37,7 +37,7 @@ spec:
 
       containers:
         - name: {{ .Chart.Name }}
-          image: "registry.oneec-dev.ai/onecdp/{{ .Chart.Name }}:{{ .Values.image.version }}"
+          image: "9311561018/{{ .Chart.Name }}:{{ .Values.image.version }}"
           imagePullPolicy: Always
           volumeMounts:
             - name: {{ .Chart.Name }}-configmap-volume
