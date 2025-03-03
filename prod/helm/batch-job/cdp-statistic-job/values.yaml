@@ -1,4 +1,4 @@
 env: prod
 
 image:
-  version: ga-0.0.59
+  version: latest
