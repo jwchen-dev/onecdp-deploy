@@ -62,10 +62,10 @@ spec:
           - name: {{ .Chart.Name }}-configmap-volume
             mountPath: /opt/service/logback-spring.xml
             subPath: logback-spring.xml
-          - name: img-data
-            mountPath: /opt/service/resources
-          - name: consumer-action-dump
-            mountPath: /opt/service/file/temp/
+          #- name: img-data
+          #  mountPath: /opt/service/resources
+          #- name: consumer-action-dump
+          #  mountPath: /opt/service/file/temp/
         #env:
         #  - name: DB_USERNAME
         #    valueFrom:
