@@ -6,7 +6,7 @@ services:
     ports:
       - 8983:8983
     volumes:
-      - /var/data/solr:/var/data/solr
+      - ./data/solr:/var/data/solr
   postgresql:
     container_name: postgresql
     image: postgres:13
@@ -17,4 +17,4 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - /var/data/postgresql:/var/data/postgresql
+      - ./data/postgresql:/var/data/postgresql

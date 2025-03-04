@@ -24,25 +24,44 @@
 在本地 Build Docker Image，並推到自己的 docker hub，再從 Azure 的 VM 做佈署到 K8s。
 
 1. cdp-member-process-job
+    已推 docker with latest ga version.
     03/03：deployed。
 1. cdp-order-process-job
+    已推 docker with latest ga version.
     03/03：deployed。
 1. cdp-platform-job
+    已推 docker with latest ga version.
     02/25：deployed。
 1. cdp-product-process-job
+    已推 docker with latest ga version.
     03/03：deployed。
 1. cdp-recommend-job
+    已推 docker with latest ga version.
     03/03：deployed。
 1. cdp-statistic-job
+    已推 docker with latest ga version.
     03/03：deployed。
 1. cdp-task-generate-job
+    已推 docker with latest ga version.
+    03/03：deployed。
 1. cdp-admin-web
+    已推 docker with latest ga version.
 1. cdp-data-api
+    已推 docker with latest ga version.
 1. cdp-embedded-openapi
+    已推 docker with latest ga version.
 1. cdp-event-job
-1. cdp-mail-ob
+    已推 docker with latest ga version.
+[!!!!!]1. cdp-mail-job
 1. cdp-merchant-web
+    已推 docker with latest ga version.
 1. cdp-mm-event-job
 1. cdp-security-api
+    已推 docker with latest ga version.
 1. cdp-sensitive-openapi
+    已推 docker with latest ga version.
 1. cdp-sensitive-openapi-job
+    已推 docker with latest ga version.
+
+1. oneec-kafka-producer-api
+    已推 docker with latest ga version.
