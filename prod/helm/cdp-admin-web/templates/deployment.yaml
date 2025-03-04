@@ -36,7 +36,7 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         image: "9311561018/{{ .Chart.Name }}:{{ .Values.image.version }}"
-        imagePullPolicy: Awlays
+        imagePullPolicy: Always
         volumeMounts:
           - name: {{ .Chart.Name }}-configmap-volume
             mountPath: /etc/nginx/html/js/env.js
