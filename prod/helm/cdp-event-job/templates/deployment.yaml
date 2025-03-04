@@ -26,12 +26,12 @@ spec:
         - name: {{ .Chart.Name }}-configmap-volume
           configMap:
             name: {{ .Chart.Name }}-configmap
-        - name: img-data
-          persistentVolumeClaim:
-            claimName: juicefs-pvc-img
-        - name: consumer-action-dump
-          persistentVolumeClaim:
-            claimName: juicefs-pvc-consumer-action-dump
+        #- name: img-data
+        #  persistentVolumeClaim:
+        #    claimName: juicefs-pvc-img
+        #- name: consumer-action-dump
+        #  persistentVolumeClaim:
+        #    claimName: juicefs-pvc-consumer-action-dump
 
       #imagePullSecrets:
       #- name: harbor-registry
@@ -95,7 +95,7 @@ spec:
             memory: 100Mi
           limits:
             cpu: 500m
-            memory: 200Mi
+            memory: 500Mi
             
         ports:
         - name: http
