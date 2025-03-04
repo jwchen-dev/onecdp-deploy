@@ -55,6 +55,7 @@
     03/04：deployed。
 1. cdp-event-job
     已推 docker with latest ga version.
+    03/04：deployed。
 [!!!!!]1. cdp-mail-job
 1. cdp-merchant-web
     已推 docker with latest ga version.

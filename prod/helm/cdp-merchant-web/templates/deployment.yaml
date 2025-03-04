@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Chart.Name }}
-  namespace: oneec
+  namespace: default
   labels:
     app: {{ .Chart.Name }}
     
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Chart.Name }}
@@ -27,16 +27,16 @@ spec:
           configMap:
             name: {{ .Chart.Name }}-configmap
 
-      imagePullSecrets:
-      - name: harbor-registry
+      #imagePullSecrets:
+      #- name: harbor-registry
 
-      nodeSelector:
-        K8S: node
+      #nodeSelector:
+      #  K8S: node
             
       containers:
       - name: {{ .Chart.Name }}
-        image: "registry.oneec-dev.ai/onecdp/{{ .Chart.Name }}:{{ .Values.image.version }}"
-        imagePullPolicy: IfNotPresent
+        image: "9311561018/{{ .Chart.Name }}:{{ .Values.image.version }}"
+        imagePullPolicy: Always
         volumeMounts:
           - name: {{ .Chart.Name }}-configmap-volume
             mountPath: /etc/nginx/html/js/env.js
@@ -45,8 +45,11 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 128Mi
-            
+            memory: 100Mi
+          limits:
+            cpu: 500m
+            memory: 500Mi
+
         ports:
         - name: http
           containerPort: 80
@@ -70,7 +73,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Chart.Name }}
-  namespace: oneec
+  namespace: default
   labels:
     app: {{ .Chart.Name }}
 spec:
