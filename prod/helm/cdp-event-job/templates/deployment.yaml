@@ -95,7 +95,7 @@ spec:
             memory: 100Mi
           limits:
             cpu: 500m
-            memory: 500Mi
+            memory: 200Mi
             
         ports:
         - name: http
