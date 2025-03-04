@@ -5,6 +5,12 @@ services:
     image: 9311561018/onecdp-solr:8.11.4
     ports:
       - 8983:8983
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr
+      - start
+      - -c
+      - -f
     volumes:
       - ./data/solr:/var/data/solr
   postgresql:
