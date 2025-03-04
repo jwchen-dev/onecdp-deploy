@@ -21,6 +21,13 @@ spec:
           env:
             - name: DYNAMIC_CONFIG_ENABLED
               value: 'true'
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 500m
+              memory: 500Mi
 ---
 apiVersion: v1
 kind: Service
