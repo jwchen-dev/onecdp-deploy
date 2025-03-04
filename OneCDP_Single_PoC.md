@@ -49,6 +49,7 @@
     03/04：deployed。
 1. cdp-data-api
     已推 docker with latest ga version.
+    03/04：deployed。
 1. cdp-embedded-openapi
     已推 docker with latest ga version.
 1. cdp-event-job

@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Chart.Name }}
-  namespace: oneec
+  namespace: default
   labels:
     app: {{ .Chart.Name }}
     
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Chart.Name }}
@@ -29,16 +29,16 @@ spec:
           configMap:
             name: {{ .Chart.Name }}-configmap
 
-      imagePullSecrets:
-      - name: harbor-registry
+      #imagePullSecrets:
+      #- name: harbor-registry
 
-      nodeSelector:
-        K8S: node
+      #nodeSelector:
+      #  K8S: node
             
       containers:
       - name: {{ .Chart.Name }}
-        image: "registry.oneec-dev.ai/onecdp/{{ .Chart.Name }}:{{ .Values.image.version }}"
-        imagePullPolicy: IfNotPresent
+        image: "9311561018/{{ .Chart.Name }}:{{ .Values.image.version }}"
+        imagePullPolicy: Always
         volumeMounts:
           - name: {{ .Chart.Name }}-configmap-volume
             mountPath: /opt/service/config/application.properties
@@ -60,34 +60,34 @@ spec:
             mountPath: /opt/service/spring-boot.sh
             subPath: spring-boot.sh
 
-        env:
-          - name: DB_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: cdp-db-secret
-                key: username
-          - name: DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: cdp-db-secret
-                key: password
-          - name: CACHE_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: cache-secret
-                key: username
-          - name: CACHE_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: cache-secret
-                key: password
+        #env:
+        #  - name: DB_USERNAME
+        #    valueFrom:
+        #      secretKeyRef:
+        #        name: cdp-db-secret
+        #        key: username
+        #  - name: DB_PASSWORD
+        #    valueFrom:
+        #      secretKeyRef:
+        #        name: cdp-db-secret
+        #        key: password
+        #  - name: CACHE_USERNAME
+        #    valueFrom:
+        #      secretKeyRef:
+        #        name: cache-secret
+        #        key: username
+        #  - name: CACHE_PASSWORD
+        #    valueFrom:
+        #      secretKeyRef:
+        #        name: cache-secret
+        #        key: password
 
         resources:
           requests:
             cpu: 100m
             memory: 500Mi
           limits:
-            cpu: 800m
+            cpu: 500m
             memory: 500Mi
             
         ports:
@@ -119,7 +119,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Chart.Name }}
-  namespace: oneec
+  namespace: default
   labels:
     app: {{ .Chart.Name }}
 spec:
