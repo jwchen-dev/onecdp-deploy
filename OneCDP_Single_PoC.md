@@ -66,6 +66,8 @@
     已推 docker with latest ga version.
 1. cdp-sensitive-openapi-job
     已推 docker with latest ga version.
+1. cdp-schedule-job
+    已推 docker with latest ga version.
 
 1. oneec-kafka-producer-api
     已推 docker with latest ga version.
