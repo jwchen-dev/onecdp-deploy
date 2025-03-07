@@ -12,7 +12,7 @@ services:
       - -c
       - -f
     volumes:
-      - ./data/solr:/var/data/solr
+      - ./data/solr:/var/solr/data/core
   postgresql:
     container_name: postgresql
     image: postgres:13
