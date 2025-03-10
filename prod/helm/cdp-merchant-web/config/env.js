@@ -1,3 +1,3 @@
 const env = {
-    apiBaseUrl: "https://api.onecdp.ai"
+    apiBaseUrl: "http://172.199.100.64/"
 };
