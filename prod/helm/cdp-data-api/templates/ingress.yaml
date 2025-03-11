@@ -4,13 +4,13 @@ metadata:
   namespace: default
   name: cdp-data-api-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    #nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: cdp-data-api-ingress
   rules:
   - http:
       paths:
-      - path: /api
+      - path: /api/v1/data/admin
         pathType: Prefix
         backend:
           service:
