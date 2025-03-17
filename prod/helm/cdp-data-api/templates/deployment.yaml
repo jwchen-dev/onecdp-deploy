@@ -14,10 +14,10 @@ spec:
     
   template:
     metadata:
-      annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
-        prometheus.io/scrape: "true"
-        prometheus.io/path: /prometheus
+      #annotations:
+      #  checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      #  prometheus.io/scrape: "true"
+      #  prometheus.io/path: /prometheus
         
       labels:
         app: {{ .Chart.Name }}
