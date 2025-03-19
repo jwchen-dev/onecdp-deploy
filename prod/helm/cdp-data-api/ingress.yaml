@@ -14,6 +14,13 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ .Chart.Name }}
+            name: cdp-data-api
+            port:
+              number: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: cdp-merchant-web
             port:
               number: 80
