@@ -17,6 +17,27 @@ spec:
             name: cdp-data-api
             port:
               number: 80
+      - path: /api/v1/data/merchant
+        pathType: Prefix
+        backend:
+          service:
+            name: cdp-data-api
+            port:
+              number: 80
+      - path: /api/v1/security/merchant
+        pathType: Prefix
+        backend:
+          service:
+            name: cdp-security-api
+            port:
+              number: 80
+      - path: /api/v1/security/admin
+        pathType: Prefix
+        backend:
+          service:
+            name: cdp-security-api
+            port:
+              number: 80
       - path: /
         pathType: Prefix
         backend:
