@@ -38,6 +38,13 @@ spec:
             name: cdp-security-api
             port:
               number: 80
+      - path: /kafka
+        pathType: Prefix
+        backend:
+          service:
+            name: kafka-ui-svc
+            port:
+              number: 8080
       - path: /
         pathType: Prefix
         backend:
